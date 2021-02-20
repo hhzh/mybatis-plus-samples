@@ -17,6 +17,7 @@ import com.baomidou.mybatisplus.generator.config.PackageConfig;
 import com.baomidou.mybatisplus.generator.config.StrategyConfig;
 import com.baomidou.mybatisplus.generator.config.TemplateConfig;
 import com.baomidou.mybatisplus.generator.config.po.TableInfo;
+import com.baomidou.mybatisplus.generator.config.rules.DateType;
 import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
 import com.baomidou.mybatisplus.generator.engine.FreemarkerTemplateEngine;
 
@@ -60,8 +61,11 @@ public class MysqlGenerator {
         GlobalConfig gc = new GlobalConfig();
         String projectPath = System.getProperty("user.dir");
         gc.setOutputDir(projectPath + "/mybatis-plus-sample-generator/src/main/java");
-        gc.setAuthor("jobob");
+        gc.setAuthor("hhzh");
         gc.setOpen(false);
+        gc.setActiveRecord(true);
+        gc.setBaseResultMap(true);
+        gc.setDateType(DateType.ONLY_DATE);
         mpg.setGlobalConfig(gc);
 
         // 数据源配置
@@ -75,7 +79,7 @@ public class MysqlGenerator {
 
         // 包配置
         PackageConfig pc = new PackageConfig();
-        pc.setModuleName(scanner("模块名"));
+        //pc.setModuleName(scanner("模块名"));
         pc.setParent("com.baomidou.mybatisplus.samples.generator");
         mpg.setPackageInfo(pc);
 
@@ -103,11 +107,16 @@ public class MysqlGenerator {
         StrategyConfig strategy = new StrategyConfig();
         strategy.setNaming(NamingStrategy.underline_to_camel);
         strategy.setColumnNaming(NamingStrategy.underline_to_camel);
-        strategy.setSuperEntityClass("com.baomidou.mybatisplus.samples.generator.common.BaseEntity");
+        //strategy.setSuperEntityClass("com.baomidou.mybatisplus.samples.generator.common.BaseEntity");
         strategy.setEntityLombokModel(true);
+        strategy.setEntitySerialVersionUID(false);
+        strategy.setEntityBooleanColumnRemoveIsPrefix(true);
+        strategy.setRestControllerStyle(true);
         strategy.setSuperControllerClass("com.baomidou.mybatisplus.samples.generator.common.BaseController");
-        strategy.setInclude(scanner("表名"));
-        strategy.setSuperEntityColumns("id");
+        // 设置表名
+        strategy.setInclude("tb_brand_info");
+        strategy.setTablePrefix("tb_");
+        //strategy.setSuperEntityColumns("id");
         strategy.setControllerMappingHyphenStyle(true);
         strategy.setTablePrefix(pc.getModuleName() + "_");
         mpg.setStrategy(strategy);

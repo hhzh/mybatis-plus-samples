@@ -48,7 +48,7 @@ public class SampleTest {
 
     @Test
     public void bDelete() {
-        assertThat(mapper.deleteById(3L)).isGreaterThan(0);
+        assertThat(mapper.deleteById(5L)).isGreaterThan(0);
         assertThat(mapper.delete(new QueryWrapper<User>()
                 .lambda().eq(User::getName, "Sandy"))).isGreaterThan(0);
     }
@@ -142,7 +142,7 @@ public class SampleTest {
 
     @Test
     public void selectMapsPage() {
-        IPage<Map<String, Object>> page = mapper.selectMapsPage(new Page<>(1, 5), Wrappers.<User>query().orderByAsc("age"));
+        IPage<Map<String, Object>> page = mapper.selectMapsPage(new Page<>(1, 3), Wrappers.<User>query().orderByAsc("age"));
         assertThat(page).isNotNull();
         assertThat(page.getRecords()).isNotEmpty();
         assertThat(page.getRecords().get(0)).isNotEmpty();
