@@ -66,11 +66,11 @@ public class MysqlGenerator {
 
         // 数据源配置
         DataSourceConfig dsc = new DataSourceConfig();
-        dsc.setUrl("jdbc:mysql://localhost:3306/ant?useUnicode=true&serverTimezone=GMT&useSSL=false&characterEncoding=utf8");
+        dsc.setUrl("jdbc:mysql://localhost:3306/demo?useUnicode=true&serverTimezone=GMT&useSSL=false&characterEncoding=utf8");
         // dsc.setSchemaName("public");
         dsc.setDriverName("com.mysql.jdbc.Driver");
         dsc.setUsername("root");
-        dsc.setPassword("1q2w3e4r");
+        dsc.setPassword("qwer1234");
         mpg.setDataSource(dsc);
 
         // 包配置
@@ -89,9 +89,9 @@ public class MysqlGenerator {
         List<FileOutConfig> focList = new ArrayList<>();
         focList.add(new FileOutConfig("/templates/mapper.xml.ftl") {
             @Override
-            public File outputFile(TableInfo tableInfo) {
+            public String outputFile(TableInfo tableInfo) {
                 // 自定义输入文件名称
-                return new File(projectPath + "/mybatis-plus-sample-generator/src/main/resources/mapper/" + pc.getModuleName()
+                return new String(projectPath + "/mybatis-plus-sample-generator/src/main/resources/mapper/" + pc.getModuleName()
                         + "/" + tableInfo.getEntityName() + "Mapper" + StringPool.DOT_XML);
             }
         });
